@@ -9,20 +9,10 @@ inputs:
     url: github:NixOS/nixpkgs/nixos-24.05
     branch: nixos-24.05
 
-# Build ALL packages (using default outputs for each category)
+# Build key packages - each transitively builds dependencies
 outputs:
-  # Cross toolchain
-  - path: packages.x86_64-linux.crossToolchain.default
-
-  # Cross temp tools
-  - path: packages.x86_64-linux.crossTempTools.default
-
-  # FHS
-  - path: packages.x86_64-linux.fhs.default
-
-  # System software
-  - path: packages.x86_64-linux.ss.default
-
-  # System configuration (includes kernel)
-  - path: packages.x86_64-linux.sysconf.default
+  - path: packages.x86_64-linux.crossToolchain.libstdcpp
+  - path: packages.x86_64-linux.crossTempTools.gcc2
+  - path: packages.x86_64-linux.fhs.utillinux
+  - path: packages.x86_64-linux.ss.e2fsprogs
   - path: packages.x86_64-linux.sysconf.kernel
