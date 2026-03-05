@@ -282,6 +282,10 @@
         kernel = linuxKernelStage;
       };
 
+      # Individual top-level packages for garnix compatibility
+      packages.x86_64-linux.linuxKernel = linuxKernelStage;
+      packages.x86_64-linux.lfsSystem = linuxKernelStage;
+
       packages.x86_64-linux.default = linuxKernelStage;
     };
 

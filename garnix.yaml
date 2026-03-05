@@ -8,7 +8,5 @@ inputs:
   nixpkgs:
     url: github:NixOS/nixpkgs/nixos-24.05
 
-# Only build the final system (kernel)
-# This transitively builds everything else
 outputs:
-  - path: packages.x86_64-linux.sysconf.kernel
+  - path: packages.x86_64-linux.lfsSystem
