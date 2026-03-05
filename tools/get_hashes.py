@@ -58,42 +58,58 @@ def print_progress(current: int, total: int, name: str) -> None:
 
 def get_hash(url: str, name: str) -> Optional[str]:
     try:
-        print_info(f"Downloading {CYAN}{name}{RESET}...")
+        print_info(f"⬇  Downloading {CYAN}{name}{RESET}...")
 
         result = subprocess.run(
             ["nix-prefetch-url", "--print-path", url],
             capture_output=True,
             text=True,
             check=True,
-            stderr=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT,
         )
 
-        path: str = result.stdout.strip().split("\n")[-1]
+        output = result.stdout.strip()
+        path: str = output.split("\n")[-1]
 
-        if not os.path.exists(path):
-            print_warning(f"File not found locally, waiting...")
-            time.sleep(2)
-            if not os.path.exists(path):
-                print_error(f"File still not found: {path}")
-                return None
-
-        print_info(f"Calculating SHA256 hash...")
-
-        hash_result = subprocess.run(
-            ["sha256sum", path], capture_output=True, text=True, check=True
-        )
-
-        sha256: str = hash_result.stdout.split()[0]
-
-        size_mb: float = os.path.getsize(path) / (1024 * 1024)
-        print_success(
-            f"{GREEN}{name}{RESET} → {GREEN}{sha256[:16]}...{RESET} ({size_mb:.1f} MB)"
-        )
+        if not path or not os.path.exists(path):
+            print_warning(f"Path not found in nix-prefetch output, using fallback...")
+            hash_result = subprocess.run(
+                ["nix-hash", "--type", "sha256", "--base32", url],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            sha256 = hash_result.stdout.strip()
+        else:
+            if os.path.exists(path):
+                size_mb = os.path.getsize(path) / (1024 * 1024)
+                hash_result = subprocess.run(
+                    ["sha256sum", path], capture_output=True, text=True, check=True
+                )
+                sha256 = hash_result.stdout.split()[0]
+                print_success(
+                    f"{GREEN}{name}{RESET} → {GREEN}{sha256[:16]}...{RESET} ({size_mb:.1f} MB)"
+                )
+                return sha256
+            else:
+                hash_result = subprocess.run(
+                    ["nix-hash", "--type", "sha256", "--base32", url],
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                )
+                sha256 = hash_result.stdout.strip()
+                print_success(f"{GREEN}{name}{RESET} → {GREEN}{sha256[:16]}...{RESET}")
+                return sha256
 
         return sha256
 
     except subprocess.CalledProcessError as e:
         print_error(f"Command failed: {e.cmd}")
+        if e.stdout:
+            print_error(f"stdout: {e.stdout[:200]}")
+        if e.stderr:
+            print_error(f"stderr: {e.stderr[:200]}")
         return None
     except Exception as e:
         print_error(f"Unexpected error: {str(e)}")
@@ -126,6 +142,7 @@ def main() -> None:
         else:
             failed.append(name)
             hashes[name] = "0" * 64
+            print_error(f"Failed to fetch hash for {name}")
 
         print()
 
