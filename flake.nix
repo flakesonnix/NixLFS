@@ -149,48 +149,6 @@
       linuxKernelStage = import ./derivations/sys_conf/linuxkernel.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; kconfig = kconfigFile; cc2 = sysConfStage; lib = nixpkgs.lib; };
     in
     {
-      packages.x86_64-linux.crossToolchain = {
-        default = libstdcppStage;
-        libstdcpp = libstdcppStage;
-        glibc = glibcStage;
-        linuxHeaders = linuxHeadersStage;
-        gcc = gccStage1;
-        binutils = binutilsStage;
-      };
-
-      packages.x86_64-linux.crossTempTools = {
-        default = gcc2Stage;
-        m4 = m4Stage;
-        ncurses = ncursesStage;
-        bash = bashStage;
-        coreutils = coreutilsStage;
-        diffutils = diffutilsStage;
-        file = fileStage;
-        findutils = findutilsStage;
-        gawk = gawkStage;
-        grep = grepStage;
-        gzip = gzipStage;
-        make = makeStage;
-        patch = patchStage;
-        sed = sedStage;
-        tar = tarStage;
-        xz = xzStage;
-        binutils2 = binutils2Stage;
-        gcc2 = gcc2Stage;
-      };
-
-      packages.x86_64-linux.fhs = {
-        default = fhsUtilLinuxStage;
-        build = fhsBuildStage;
-        gettext = fhsGetTextStage;
-        bison = fhsBisonStage;
-        perl = fhsPerlStage;
-        python = fhsPythonStage;
-        texinfo = fhsTexinfoStage;
-        utillinux = fhsUtilLinuxStage;
-        cleanup = fhsCleanupStage;
-      };
-
       # Individual top-level packages for garnix compatibility
       packages.x86_64-linux.linuxKernel = linuxKernelStage;
       packages.x86_64-linux.lfsSystem = linuxKernelStage;
