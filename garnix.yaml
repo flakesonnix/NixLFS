@@ -9,132 +9,20 @@ inputs:
     url: github:NixOS/nixpkgs/nixos-24.05
     branch: nixos-24.05
 
-# Build ALL packages
+# Build ALL packages (using default outputs for each category)
 outputs:
   # Cross toolchain
   - path: packages.x86_64-linux.crossToolchain.default
-  - path: packages.x86_64-linux.crossToolchain.binutils
-  - path: packages.x86_64-linux.crossToolchain.gcc
-  - path: packages.x86_64-linux.crossToolchain.linuxHeaders
-  - path: packages.x86_64-linux.crossToolchain.glibc
-  - path: packages.x86_64-linux.crossToolchain.libstdcpp
 
   # Cross temp tools
   - path: packages.x86_64-linux.crossTempTools.default
-  - path: packages.x86_64-linux.crossTempTools.m4
-  - path: packages.x86_64-linux.crossTempTools.ncurses
-  - path: packages.x86_64-linux.crossTempTools.bash
-  - path: packages.x86_64-linux.crossTempTools.coreutils
-  - path: packages.x86_64-linux.crossTempTools.diffutils
-  - path: packages.x86_64-linux.crossTempTools.file
-  - path: packages.x86_64-linux.crossTempTools.findutils
-  - path: packages.x86_64-linux.crossTempTools.gawk
-  - path: packages.x86_64-linux.crossTempTools.grep
-  - path: packages.x86_64-linux.crossTempTools.gzip
-  - path: packages.x86_64-linux.crossTempTools.make
-  - path: packages.x86_64-linux.crossTempTools.patch
-  - path: packages.x86_64-linux.crossTempTools.sed
-  - path: packages.x86_64-linux.crossTempTools.tar
-  - path: packages.x86_64-linux.crossTempTools.xz
-  - path: packages.x86_64-linux.crossTempTools.binutils2
-  - path: packages.x86_64-linux.crossTempTools.gcc2
 
   # FHS
   - path: packages.x86_64-linux.fhs.default
-  - path: packages.x86_64-linux.fhs.build
-  - path: packages.x86_64-linux.fhs.gettext
-  - path: packages.x86_64-linux.fhs.bison
-  - path: packages.x86_64-linux.fhs.perl
-  - path: packages.x86_64-linux.fhs.python
-  - path: packages.x86_64-linux.fhs.texinfo
-  - path: packages.x86_64-linux.fhs.utillinux
-  - path: packages.x86_64-linux.fhs.cleanup
 
   # System software
   - path: packages.x86_64-linux.ss.default
-  - path: packages.x86_64-linux.ss.manpages
-  - path: packages.x86_64-linux.ss.iana
-  - path: packages.x86_64-linux.ss.glibc
-  - path: packages.x86_64-linux.ss.glibctime
-  - path: packages.x86_64-linux.ss.zlib
-  - path: packages.x86_64-linux.ss.bzip2
-  - path: packages.x86_64-linux.ss.xz
-  - path: packages.x86_64-linux.ss.zstd
-  - path: packages.x86_64-linux.ss.file
-  - path: packages.x86_64-linux.ss.readline
-  - path: packages.x86_64-linux.ss.pcre2
-  - path: packages.x86_64-linux.ss.m4
-  - path: packages.x86_64-linux.ss.bc
-  - path: packages.x86_64-linux.ss.flex
-  - path: packages.x86_64-linux.ss.tcl
-  - path: packages.x86_64-linux.ss.expect
-  - path: packages.x86_64-linux.ss.dejagnu
-  - path: packages.x86_64-linux.ss.pkgconf
-  - path: packages.x86_64-linux.ss.binutils
-  - path: packages.x86_64-linux.ss.gmp
-  - path: packages.x86_64-linux.ss.mpfr
-  - path: packages.x86_64-linux.ss.mpc
-  - path: packages.x86_64-linux.ss.isl
-  - path: packages.x86_64-linux.ss.attr
-  - path: packages.x86_64-linux.ss.acl
-  - path: packages.x86_64-linux.ss.libcap
-  - path: packages.x86_64-linux.ss.libxcrypt
-  - path: packages.x86_64-linux.ss.shadow
-  - path: packages.x86_64-linux.ss.gcc
-  - path: packages.x86_64-linux.ss.ncurses
-  - path: packages.x86_64-linux.ss.sed
-  - path: packages.x86_64-linux.ss.psmisc
-  - path: packages.x86_64-linux.ss.gettext
-  - path: packages.x86_64-linux.ss.bison
-  - path: packages.x86_64-linux.ss.grep
-  - path: packages.x86_64-linux.ss.bash
-  - path: packages.x86_64-linux.ss.libtool
-  - path: packages.x86_64-linux.ss.gdbm
-  - path: packages.x86_64-linux.ss.gperf
-  - path: packages.x86_64-linux.ss.expat
-  - path: packages.x86_64-linux.ss.inetutils
-  - path: packages.x86_64-linux.ss.less
-  - path: packages.x86_64-linux.ss.perl
-  - path: packages.x86_64-linux.ss.xmlparser
-  - path: packages.x86_64-linux.ss.intltool
-  - path: packages.x86_64-linux.ss.autoconf
-  - path: packages.x86_64-linux.ss.automake
-  - path: packages.x86_64-linux.ss.openssl
-  - path: packages.x86_64-linux.ss.kmod
-  - path: packages.x86_64-linux.ss.libelf
-  - path: packages.x86_64-linux.ss.libffi
-  - path: packages.x86_64-linux.ss.sqlite
-  - path: packages.x86_64-linux.ss.python
-  - path: packages.x86_64-linux.ss.flitcore
-  - path: packages.x86_64-linux.ss.wheel
-  - path: packages.x86_64-linux.ss.setuptools
-  - path: packages.x86_64-linux.ss.ninja
-  - path: packages.x86_64-linux.ss.meson
-  - path: packages.x86_64-linux.ss.coreutils
-  - path: packages.x86_64-linux.ss.check
-  - path: packages.x86_64-linux.ss.diffutils
-  - path: packages.x86_64-linux.ss.gawk
-  - path: packages.x86_64-linux.ss.findutils
-  - path: packages.x86_64-linux.ss.groff
-  - path: packages.x86_64-linux.ss.grub
-  - path: packages.x86_64-linux.ss.iproute
-  - path: packages.x86_64-linux.ss.kbd
-  - path: packages.x86_64-linux.ss.libpipeline
-  - path: packages.x86_64-linux.ss.make
-  - path: packages.x86_64-linux.ss.patch
-  - path: packages.x86_64-linux.ss.tar
-  - path: packages.x86_64-linux.ss.texinfo
-  - path: packages.x86_64-linux.ss.vim
-  - path: packages.x86_64-linux.ss.markupsafe
-  - path: packages.x86_64-linux.ss.jinja
-  - path: packages.x86_64-linux.ss.systemd
-  - path: packages.x86_64-linux.ss.dbus
-  - path: packages.x86_64-linux.ss.mandb
-  - path: packages.x86_64-linux.ss.procps
-  - path: packages.x86_64-linux.ss.utillinux
-  - path: packages.x86_64-linux.ss.e2fsprogs
 
-  # System configuration
+  # System configuration (includes kernel)
   - path: packages.x86_64-linux.sysconf.default
-  - path: packages.x86_64-linux.sysconf.sysconf
   - path: packages.x86_64-linux.sysconf.kernel
