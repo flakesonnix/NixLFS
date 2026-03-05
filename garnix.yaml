@@ -7,12 +7,8 @@ systems:
 inputs:
   nixpkgs:
     url: github:NixOS/nixpkgs/nixos-24.05
-    branch: nixos-24.05
 
-# Build key packages - each transitively builds dependencies
+# Only build the final system (kernel)
+# This transitively builds everything else
 outputs:
-  - path: packages.x86_64-linux.crossToolchain.libstdcpp
-  - path: packages.x86_64-linux.crossTempTools.gcc2
-  - path: packages.x86_64-linux.fhs.utillinux
-  - path: packages.x86_64-linux.ss.e2fsprogs
   - path: packages.x86_64-linux.sysconf.kernel
