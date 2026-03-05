@@ -41,7 +41,7 @@ let
       # src folder
       mkdir -pv $LFS/tmp/src
 
-      cp -vp $patchSrc $SRC/kbd-2.6.4-backspace-1.patch
+      cp -vp $patchSrc $SRC/kbd-2.9.0-backspace-1.patch
 
       cp -rpv $SRC/* $LFS/tmp/src
     '';
@@ -117,7 +117,7 @@ let
     set -e
     cd /tmp/src
 
-    patch -Np1 -i ./kbd-2.6.4-backspace-1.patch
+    patch -Np1 -i ./kbd-2.9.0-backspace-1.patch
     sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
     sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
 
@@ -129,7 +129,7 @@ let
 
     make install
 
-    cp -R -v docs/doc -T /usr/share/doc/kbd-2.6.4
+    cp -R -v docs/doc -T /usr/share/doc/kbd-2.9.0
 
     set +e
     mkdir $OUT/{usr,opt,srv,tmp,boot,home,sbin,root,etc,lib,var,bin,tools,media,build_tools}

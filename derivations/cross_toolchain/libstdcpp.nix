@@ -48,10 +48,10 @@ let
                        --prefix=/usr                  \
                        --host=$LFS_TGT                 \
                        --build=$(uname -m)-pc-linux-gnu \
-                       --disable-multilib              \
+                       --enable-multilib              \
                        --disable-nls                   \
                        --disable-libstdcxx-pch         \
-                       --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/14.2.0 \
+                       --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/15.2.0 \
                        CFLAGS='-fpermissive' \
                        CXXFLAGS='-fpermissive'
     '';

@@ -3,11 +3,11 @@ let
   stdenv = pkgs.stdenv;
 
   fhsEnv = stdenv.mkDerivation {
-    name = "ss-iproute2-env";
+    name = "ss-sqlite-env";
 
     src = pkgs.fetchurl {
-      url = lfsSrcs.iproute2;
-      sha256 = lfsHashes.iproute2;
+      url = lfsSrcs.sqlite;
+      sha256 = lfsHashes.sqlite;
     };
 
     phases = [ "prepEnvironmentPhase" "unpackPhase" "configurePhase" "buildPhase" ];
@@ -31,11 +31,8 @@ let
 
     configurePhase = ''
       export SRC=$PWD
-      # Output directory
       mkdir $out
-      # src folder
       mkdir -pv $LFS/tmp/src
-
       cp -rpv $SRC/* $LFS/tmp/src
     '';
 
@@ -43,18 +40,13 @@ let
       ${pkgs.buildFHSEnv {
           name = "fhs";
 
-        # This is necessary to override default /lib64 symlink set to /lib.
-        # This symlink prevented binding LFS lib to FHS lib64.
-        # see setupTargetProfile in buildFHSenv.nix
-        # LFS bin interpreter is set to /lib64, so this is important in order
-        # for LFS bins to function in FHS env.
         extraBuildCommands = ''
             rm -rf lib64
         '';
 
         extraBwrapArgs = [
             "--unshare-all"
-            "--hostname lfs-bwrap-iproute"
+            "--hostname lfs-bwrap-sqlite"
             "--uid 0"
             "--gid 0"
             "--chdir /"
@@ -63,7 +55,7 @@ let
             "--tmpfs /dev/shm"
             "--tmpfs /etc"
             "--dir /tmp/out"
-              "--dir /build_tools"
+            "--dir /build_tools"
             "--bind $out /tmp/out"
             "--bind $LFS/usr/lib /lib64"
             "--bind $LFS/tmp/src /tmp/src"
@@ -77,7 +69,7 @@ let
             "--bind $LFS/var /var"
             "--bind $LFS/etc /etc"
             "--bind $LFS/home /home"
-              "--bind $LFS/build_tools /build_tools"
+            "--bind $LFS/build_tools /build_tools"
             "--clearenv"
             "--setenv HOME /root"
             "--setenv PATH /usr/bin:/usr/sbin"
@@ -110,16 +102,14 @@ let
     set -e
     cd /tmp/src
 
-    sed -i /ARPD/d Makefile
+    ./configure --prefix=/usr \
+                --disable-static \
+                --enable-fts5 \
+                --enable-json1
 
-    rm -fv man/man8/arpd.8
+    make -j$(nproc)
 
-    make NETNS_RUN_DIR=/run/netns -j$(nproc)
-
-    make SBINDIR=/usr/sbin install
-
-    mkdir -pv /usr/share/doc/iproute2-6.18.0
-    cp -v COPYING README* /usr/share/doc/iproute2-6.18.0
+    make install
 
     set +e
     mkdir $OUT/{usr,opt,srv,tmp,boot,home,sbin,root,etc,lib,var,bin,tools,media,build_tools}

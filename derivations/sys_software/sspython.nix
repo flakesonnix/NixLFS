@@ -127,11 +127,11 @@ let
 
     make install
 
-    install -v -dm755 /usr/share/doc/python-3.12.5/html
+    install -v -dm755 /usr/share/doc/python-3.14.3/html
     tar --no-same-owner \
         -xvf ./python-docs-html.tar.bz2
-    cp -R --no-preserve=mode python-3.12.5-docs-html/* \
-    /usr/share/doc/python-3.12.5/html
+    cp -R --no-preserve=mode python-3.14.3-docs-html/* \
+    /usr/share/doc/python-3.14.3/html
 
     set +e
     mkdir $OUT/{usr,opt,srv,tmp,boot,home,sbin,root,etc,lib,var,bin,tools,media,build_tools}

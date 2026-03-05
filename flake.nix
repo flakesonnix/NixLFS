@@ -71,7 +71,8 @@
       ssZstdStage = import ./derivations/sys_software/sszstd.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssXzStage; lib = nixpkgs.lib; };
       ssFileStage = import ./derivations/sys_software/ssfile.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssZstdStage; lib = nixpkgs.lib; };
       ssReadlineStage = import ./derivations/sys_software/ssreadline.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssFileStage; lib = nixpkgs.lib; };
-      ssM4Stage = import ./derivations/sys_software/ssm4.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssReadlineStage; lib = nixpkgs.lib; };
+      ssPcre2Stage = import ./derivations/sys_software/sspcre2.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssReadlineStage; lib = nixpkgs.lib; };
+      ssM4Stage = import ./derivations/sys_software/ssm4.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssPcre2Stage; lib = nixpkgs.lib; };
       ssBcStage = import ./derivations/sys_software/ssbc.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssM4Stage; lib = nixpkgs.lib; };
       ssFlexStage = import ./derivations/sys_software/ssflex.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssBcStage; lib = nixpkgs.lib; };
       ssTclStage = import ./derivations/sys_software/sstcl.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssFlexStage; lib = nixpkgs.lib; };
@@ -82,7 +83,8 @@
       ssGmpStage = import ./derivations/sys_software/ssgmp.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssPkgconfStage; lib = nixpkgs.lib; };
       ssMpfrStage = import ./derivations/sys_software/ssmpfr.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssGmpStage; lib = nixpkgs.lib; };
       ssMpcStage = import ./derivations/sys_software/ssmpc.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssMpfrStage; lib = nixpkgs.lib; };
-      ssAttrStage = import ./derivations/sys_software/ssattr.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssMpcStage; lib = nixpkgs.lib; };
+      ssIslStage = import ./derivations/sys_software/ssisl.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssMpcStage; lib = nixpkgs.lib; };
+      ssAttrStage = import ./derivations/sys_software/ssattr.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssIslStage; lib = nixpkgs.lib; };
       ssAclStage = import ./derivations/sys_software/ssacl.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssAttrStage; lib = nixpkgs.lib; };
       ssLibcapStage = import ./derivations/sys_software/sslibcap.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssAclStage; lib = nixpkgs.lib; };
       ssLibxcryptStage = import ./derivations/sys_software/sslibxcrypt.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssLibcapStage; lib = nixpkgs.lib; };
@@ -110,7 +112,8 @@
       ssKmodStage = import ./derivations/sys_software/sskmod.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssOpensslStage; lib = nixpkgs.lib; };
       ssLibelfStage = import ./derivations/sys_software/sslibelf.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssKmodStage; lib = nixpkgs.lib; };
       ssLibffiStage = import ./derivations/sys_software/sslibffi.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssLibelfStage; lib = nixpkgs.lib; };
-      ssPythonStage = import ./derivations/sys_software/sspython.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssLibffiStage; lib = nixpkgs.lib; };
+      ssSqliteStage = import ./derivations/sys_software/sssqlite.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssLibffiStage; lib = nixpkgs.lib; };
+      ssPythonStage = import ./derivations/sys_software/sspython.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssSqliteStage; lib = nixpkgs.lib; };
       ssFlitcoreStage = import ./derivations/sys_software/ssflitcore.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssPythonStage; lib = nixpkgs.lib; };
       ssWheelStage = import ./derivations/sys_software/sswheel.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssFlitcoreStage; lib = nixpkgs.lib; };
       ssSetuptoolsStage = import ./derivations/sys_software/sssetuptools.nix { pkgs = x86_pkgs; lfsSrcs = lfsSrcList; lfsHashes = lfsHashList; cc2 = ssWheelStage; lib = nixpkgs.lib; };
@@ -200,6 +203,7 @@
         zstd = ssZstdStage;
         file = ssFileStage;
         readline = ssReadlineStage;
+        pcre2 = ssPcre2Stage;
         m4 = ssM4Stage;
         bc = ssBcStage;
         flex = ssFlexStage;
@@ -211,6 +215,7 @@
         gmp = ssGmpStage;
         mpfr = ssMpfrStage;
         mpc = ssMpcStage;
+        isl = ssIslStage;
         attr = ssAttrStage;
         acl = ssAclStage;
         libcap = ssLibcapStage;
@@ -239,6 +244,7 @@
         kmod = ssKmodStage;
         libelf = ssLibelfStage;
         libffi = ssLibffiStage;
+        sqlite = ssSqliteStage;
         python = ssPythonStage;
         flitcore = ssFlitcoreStage;
         wheel = ssWheelStage;

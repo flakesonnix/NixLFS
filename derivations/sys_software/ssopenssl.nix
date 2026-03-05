@@ -123,8 +123,8 @@ let
 
     sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
     make MANSUFFIX=ssl install
-    mv -v /usr/share/doc/openssl /usr/share/doc/openssl-3.3.1
-    cp -vfr doc/* /usr/share/doc/openssl-3.3.1
+    mv -v /usr/share/doc/openssl /usr/share/doc/openssl-3.6.1
+    cp -vfr doc/* /usr/share/doc/openssl-3.6.1
 
     set +e
     mkdir $OUT/{usr,opt,srv,tmp,boot,home,sbin,root,etc,lib,var,bin,tools,media,build_tools}

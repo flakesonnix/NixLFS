@@ -1,0 +1,19 @@
+# garnix.yaml configuration for NixLFS
+# https://garnix.io
+
+systems:
+  - x86_64-linux
+
+inputs:
+  nixpkgs:
+    url: github:NixOS/nixpkgs/nixos-24.05
+    branch: nixos-24.05
+
+# Build these outputs
+outputs:
+  - path: packages.x86_64-linux.crossToolchain
+  - path: packages.x86_64-linux.crossTempTools
+  - path: packages.x86_64-linux.fhs
+  - path: packages.x86_64-linux.ss
+  - path: packages.x86_64-linux.sysconf
+  - path: packages.x86_64-linux.default

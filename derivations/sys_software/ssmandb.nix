@@ -111,7 +111,7 @@ let
     cd /tmp/src
 
     ./configure --prefix=/usr \
-                --docdir=/usr/share/doc/man-db-2.12.1 \
+                --docdir=/usr/share/doc/man-db-2.13.1 \
                 --sysconfdir=/etc \
                 --disable-setuid \
                 --enable-cache-owner=bin \

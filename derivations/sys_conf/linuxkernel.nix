@@ -140,13 +140,13 @@ let
 
         mkdir /boot
 
-        cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.10.5-lfs-12.2-systemd
+        cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.18.10-lfs-ml-12.4-195-systemd
 
-        cp -iv System.map /boot/System.map-6.10.5
+        cp -iv System.map /boot/System.map-6.18.10
 
-        cp -iv .config /boot/config-6.10.5
+        cp -iv .config /boot/config-6.18.10
 
-        cp -r Documentation -T /usr/share/doc/linux-6.10.5
+        cp -r Documentation -T /usr/share/doc/linux-6.18.10
 
         install -v -m755 -d /etc/modprobe.d
 
